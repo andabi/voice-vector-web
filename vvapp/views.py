@@ -7,4 +7,5 @@ import os, requests, time, pickle
 @app.route('/')
 @app.route('/index')
 def end_index():
-    return "Hello, Voice Vector!"
+    #return "Hello, Voice Vector!"
+    return render_template("index.html")

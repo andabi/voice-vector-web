@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/static/boot/css/bootstrap.min.css"/>
+        <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon">
+        
+        <title>Voice Vector Webpage</title>
+        
+        {% block head_og %}
+        <meta property="og:title" content="Voice Vector Webpage" />
+        <meta property="og:description" content="Voice Vector Webpage" />
+        {% endblock %}
+        <meta property="og:type" content="website" />
+
+        <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+    </head>
+    <body>
+        
+        
+        <div class="container-fluid">
+            <div class="container">
+                <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
+                    <div class="space_100"></div>
+                    <div class="space_100"></div>
+                    <div class="row">
+                        <div class="col-xs-12">당신의 목소리를 녹음해보세요</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">button here</div>
+                    </div>
+                    <div class="space_100"></div>
+                    <div class="space_100"></div>
+                    <div class="space_100"></div>
+                    
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="container-fluid bg_kakao_gray" id="footer">
+            <div class="container">
+                <div class="row">
+                    <!--<div class="col-md-4 col-xs-12">-->
+                    <div class="col-xs-12">
+                        Copyright © Kakao Brain Corp. All rights reserved.
+                    </div>
+                    {#<div class="col-md-8 col-xs-12" id="footer_text">
+                        13494 경기도 성남시 분당구 판교역로 235, 6층 (삼평동, 에이치스퀘어 엔동)<BR/>
+                        Copyright © 2017 Kakao Brain Corp. All rights reserved.
+                        <a class="txt_nodeco" href="/extra/open">오픈소스 라이센스</a> | <a class="txt_nodeco" href="/extra/privacy">개인정보 처리방침</a>
+                    </div>#}
+                </div>
+            </div>
+        </div>
+        
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/static/boot/js/bootstrap.min.js"></script>
+        
+        
+        {% block page_script %}{% endblock %}
+        
+    </body>
+</html>
