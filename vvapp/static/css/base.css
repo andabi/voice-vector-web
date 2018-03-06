@@ -163,117 +163,18 @@ body{font-family: 'Noto Sans KR', sans-serif !important; font-weight:400; text-a
 
 .navbar-nav { margin: 0px; }
 
-.navbar-brand {height: 60px; padding: 10px 15px; }
-/* 600~767px */
-@media (max-width: 767px) and (min-width: 600px) {
-    .navbar-brand {height: 60px; padding: 7px 15px; }
-}
-    
-#header_logo { height: 25px; margin-right: 10px; margin-top: 7px; line-height: 70px;}
 .navbar-nav>li>a { padding-top: 0px; padding-bottom: 0px;}
 #nav_main .navbar-nav>li>a { line-height: 50px; font-size: 1.2em; margin-top: 6px; }
 
 /* 1단계 메뉴 및 hover 스타일 */
-ul.nav li.dropdown>a {margin-bottom: -2px; border-bottom: 2px solid transparent;}
-ul.nav li.dropdown:hover ul.dropdown-menu { display: block; }
-
-/* 1단계 메뉴 hover/active의 그라디언트 적용 */
-ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after {
-    content:"";
-    background-color: #ffcd00;
-    background-image: -webkit-linear-gradient( -55deg, #ffcd00 0%, #ffcd00 20%, #4c4c4c 20%, #4c4c4c 20%);
-    background-image: linear-gradient( -55deg, #ffcd00 0%, #ffcd00 20%, #4c4c4c 20%, #4c4c4c 20%);
-    display: block;
-    height:2px;
-    position: absolute;
-    bottom: 0;
-    
-    margin: 0px 5px;
+ul.nav li.dropdown>a {
+    margin-bottom: -2px;
+    border-bottom: 2px solid transparent;
+    padding-left:0px; 
+    padding-right:0px; 
+    width:100%; 
+    text-align:center;
 }
-ul.nav li.dropdown.active>a{
-    background-color: transparent !important;
-}
-ul.nav li.dropdown:hover>a {
-    font-weight: bold;
-}
-
-/* 992px~ */
-@media (min-width: 992px) { 
-    #nav_main ul.nav li.dropdown {width: 95px;}
-    ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after { width: 85px;}
-}
-
-/* 768~992px */
-@media (max-width: 991px) and (min-width: 768px) { 
-    #nav_main ul.nav li.dropdown {width: 90px;}
-    ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after { width: 80px;}
-    /*#nav_main .navbar-nav>li>a { line-height: 60px; font-size: 1.2em; margin-top: 2px; }*/
-}
-
-/* 660~767px */
-@media (max-width: 767px) and (min-width: 660px) { 
-    #nav_main ul.nav li.dropdown {width: 80px;}
-    ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after { width: 70px;}
-    #nav_main .navbar-nav>li>a { line-height: 60px; font-size: 1.1em; margin-top: 0px; padding-bottom:3px; }
-
-    .navbar-header:before,.navbar-header:after {display: inline; content: " ";}
-    .navbar-nav {float: left;}
-    .navbar-nav>li {float: left;}
-}
-
-/* 600~659px */
-@media (max-width: 659px) and (min-width: 600px) { 
-    #nav_main ul.nav li.dropdown {width: 75px;}
-    ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after { width: 65px;}
-    #nav_main .navbar-nav>li>a { line-height: 60px; font-size: 1.05em; margin-top: 0px; padding-bottom:3px; }
-
-    .navbar-header:before,.navbar-header:after {display: inline; content: " ";}
-    .navbar-nav {float: left;}
-    .navbar-nav>li {float: left;}
-}
-
-/* 600px~ */
-@media (min-width: 600px){
-    /*ul.nav li.dropdown{
-        margin: 0px 10px;
-    }*/
-}
-
-/* ~599px */
-@media (max-width: 599px){
-
-    #nav_top .navbar-header:before,.navbar-header:after {display: inline; content: " ";}
-    #nav_top .navbar-nav {float: right;}
-    #nav_top .navbar-nav>li {float: right;}
-
-    .navbar-brand {height: 100%; padding: 10px 0px; }
-    #header_logo { height: 25px; margin-right: 0px;}
-    #nav_main .navbar-brand {transform: translateX(-50%); left:50%; position:absolute;}
-
-    #nav_main .navbar-nav {margin-top: 72px; text-align: center;}
-    #nav_main .navbar-nav>li {display: inline-block;}
-    #nav_space_mobile {display: block; min-height: 50px; background-color: rgba(0,0,0,0.1)}
-
-    ul.nav li.dropdown:hover ul.dropdown-menu { display: none; margin-top: 3px; }
-}
-
-/* ~599px, change size of items in main navigation bar */
-@media (max-width: 599px) and (min-width: 410px){
-    #nav_main ul.nav li.dropdown {width: 70px;}
-    #nav_main .navbar-nav>li>a { line-height: 40px; font-size: 1.1em; margin-top: -5px; }
-}
-
-@media (max-width: 409px) and (min-width: 360px){
-    #nav_main ul.nav li.dropdown {width: 65px;}
-    #nav_main .navbar-nav>li>a { line-height: 40px; font-size: 1.0em; margin-top: -5px; }
-}
-
-@media (max-width: 359px){
-    #nav_main ul.nav li.dropdown {width: 50px;}
-    #nav_main .navbar-nav>li>a { line-height: 40px; font-size: 0.85em; margin-top: -5px; }
-}
-
-ul.nav li.dropdown>a {padding-left:0px; padding-right:0px; width:100%; text-align:center;}
 
 
 /* footer */
@@ -284,7 +185,7 @@ ul.nav li.dropdown>a {padding-left:0px; padding-right:0px; width:100%; text-alig
 
 
 
-/* 새로운 2단계 메뉴 시스템을 위한 CSS */
+/* navbar */
 
 .navbar>.container{
     display: table;
@@ -298,21 +199,11 @@ ul.nav li.dropdown>a {padding-left:0px; padding-right:0px; width:100%; text-alig
     float: none !important;
 }
 #navbar_main{
-    float: right;
+    float: none;
     margin-right: 0px;
 }
 ul.nav li.dropdown{
-    position: static;
-}
-ul.nav li.dropdown ul.dropdown-menu{
-    width: 100% !important;
-    left: 0;
-    right: 0;
-    background-color: rgba(255,255,255,0.93);
-}
-ul.nav li.dropdown ul.dropdown-menu .container{
-    padding-top: 5px;
-    padding-bottom: 5px;
+    float: none !important;
 }
 
 
