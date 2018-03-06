@@ -1,7 +1,7 @@
 @charset "UTF-8";
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
-@import url(http://fonts.googleapis.com/earlyaccess/notosanssc.css);
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
+@import url(https://fonts.googleapis.com/earlyaccess/notosanssc.css);
 
 html{background-color: #4c4c4c;}
 body{font-family: 'Noto Sans KR', sans-serif !important; font-weight:400; text-align: justify; color: #111;}
@@ -157,14 +157,8 @@ body{font-family: 'Noto Sans KR', sans-serif !important; font-weight:400; text-a
 .block_center {text-align: center;}
 
 .navbar { margin-bottom: 0px; border: none; min-height: 0px; border-radius: 0px; border: none; }
-#nav_top {height: 35px;}
-#nav_top a { color: white !important; }
-#nav_top a:hover { color: #ffcd00 !important;}
 
-.nav_a_sns {padding: 6px 8px !important;}
-#nav_top svg:hover .sns_logo { fill: #ffcd00 !important;}
-
-#nav_main {height: 60px; background-color: white; border-bottom: 1px solid #ddd;}
+#nav_main {height: 60px; background-color: rgba(255,255,255,0.7); border-bottom: 1px solid #ddd;}
 #nav_main a { color: black; !important }
 
 .navbar-nav { margin: 0px; }
@@ -177,19 +171,11 @@ body{font-family: 'Noto Sans KR', sans-serif !important; font-weight:400; text-a
     
 #header_logo { height: 25px; margin-right: 10px; margin-top: 7px; line-height: 70px;}
 .navbar-nav>li>a { padding-top: 0px; padding-bottom: 0px;}
-#nav_top .navbar-nav>li>a { line-height: 35px; padding-top: 2px; }
 #nav_main .navbar-nav>li>a { line-height: 50px; font-size: 1.2em; margin-top: 6px; }
-
-/* mobile only */
-#nav_space_mobile {display: hidden;}
 
 /* 1단계 메뉴 및 hover 스타일 */
 ul.nav li.dropdown>a {margin-bottom: -2px; border-bottom: 2px solid transparent;}
 ul.nav li.dropdown:hover ul.dropdown-menu { display: block; }
-/*
-ul.nav li.dropdown:hover>a {border-bottom: 5px solid #4c4c4c; color: #000 !important; font-weight: bold;}
-ul.nav li.dropdown.active>a {border-bottom: 5px solid #4c4c4c; color: #000 !important; background-color: transparent !important; font-weight: bold;}
-*/
 
 /* 1단계 메뉴 hover/active의 그라디언트 적용 */
 ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after {
@@ -207,93 +193,8 @@ ul.nav li.dropdown:hover:after, ul.nav li.dropdown.active:after {
 ul.nav li.dropdown.active>a{
     background-color: transparent !important;
 }
-/*ul.nav li.dropdown:hover>a, ul.nav li.dropdown.active>a {
-    font-weight: bold;
-}*/
 ul.nav li.dropdown:hover>a {
     font-weight: bold;
-}
-
-/* 2단계 메뉴 */
-.nav_second {
-    border-bottom: 1px solid #EEE;
-    background-color: rgba(255,255,255,0.85);
-    
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-.nav_second_title {
-    line-height: 60px;
-    font-weight: bold;
-    font-size: 1.3em;
-}
-.nav_second ul {
-    list-style-type: none;
-    float: right;
-    margin-bottom: -7px;
-}
-.nav_second li {
-    display: inline-block;
-}
-.nav_second a {
-    padding: 20px 20px;
-    float: right;
-    color: #555;
-}
-.nav_second a:hover {
-    text-decoration: none;
-    color: #222;
-    font-weight: regular;
-}
-
-/* 2단계 메뉴 지원을 위한 더미 공간 */
-.linker_head::before { 
-  display: block; 
-  content: " "; 
-  margin-top: -60px; 
-  height: 60px; 
-  visibility: hidden; 
-  pointer-events: none;
-}
-
-/* 헤드 컨테이너 */
-#con_head {
-    background-size: cover;
-    min-height: 300px;
-    background-position-y: 40%;
-}
-#con_head .head_title{
-    color: #FFF;
-    opacity: 0.8;
-    font-size: 1.1em;
-    text-shadow: 0 1px 1px #555;
-}
-#con_head .head_content{
-    color: #FFF;
-    font-size: 1.75em;
-    text-shadow: 0 1px 1px #555;
-    margin-top: 10px;
-}
-@media (min-width: 1200px) { 
-    #con_head {
-        min-height: 400px;
-    }
-    #con_head .head_title{
-        margin-top: 30px;
-    }
-    #con_head .head_content{
-        font-size: 1.9em;
-    }
-}
-@media (max-width: 767px) { 
-    #con_head {
-        min-height: 230px;
-    }
-    #con_head .head_content{
-        font-size: 1.4em;
-    }
 }
 
 /* 992px~ */
