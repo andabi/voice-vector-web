@@ -16,17 +16,35 @@
         <meta property="og:type" content="website" />
 
         <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+        
         <script src="/static/js/audiodisplay.js"></script>
         <script src="/static/js/recorderjs/recorder.js"></script>
         <script src="/static/js/main.js"></script>
+        
         <style>
-            .recording{color: blue;}
         </style>
     </head>
     <body>
         
+        <nav class="navbar navbar-default" id="nav_main" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <!--<a class="navbar-brand" href="{% if lang=='en' %}/en{% endif %}/index">
+                        <img alt="vv" src="/static/images/logo.png" srcset="/static/images/logo.svg" id="header_logo">
+                    </a>-->
+                    <a class="navbar-brand" href="#">Voice Vector Web</a>
+                </div>
+                <div id="navbar-extend">
+                    <ul class="nav navbar-nav" id="navbar_main">
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
         
-        <div class="container-fluid">
+        
+        <div class="container-fluid" id="conf_body">
             <div class="container">
                 <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
                     <div class="space_100"></div>
