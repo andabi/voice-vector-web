@@ -27,4 +27,25 @@ body{
     )
 }
 
+#ui_con{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#ui_row{
+    height: 300px;
+}
+
+#ui_box{
+    height: 100%;
+    background-color: white;
+    border: 5px solid #ffcd00;
+    border-radius: 75px;
+}
+
+#mic_wave{
+    height: 100px;
+    width: 70%;
+}
+
 .recording{color: blue;}
