@@ -6,6 +6,11 @@ import os, requests, time, pickle
 from vvapp.tf_model import do_inference
 import numpy as np
 
+
+# Initial warm-up for tf-model
+result = do_inference('zeze_voice.wav')
+print("warmed up!")
+
 # index
 @app.route('/')
 @app.route('/index')
