@@ -7,10 +7,6 @@ from vvapp.tf_model import do_inference
 import numpy as np
 
 
-# Initial warm-up for tf-model
-result = do_inference('zeze_voice.wav')
-print("warmed up!")
-
 # index
 @app.route('/')
 @app.route('/index')
@@ -21,8 +17,8 @@ def end_index():
 
 @app.route('/process')
 def api_process():
-#    result = do_inference('avin_voice.wav')
-    result = do_inference('zeze_voice.wav')
+    result = do_inference('avin_voice.wav')
+#    result = do_inference('zeze_voice.wav')
 
     response = np.array(result.outputs['prob'].float_val)
     top3 = np.argsort(response)[::-1][:3]

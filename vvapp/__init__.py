@@ -17,4 +17,9 @@ app.config['TF_SERVER_HOST'] = 'csi-cluster-gpu23.dakao.io'
 app.config['TF_SERVER_PORT'] = '1027'
 Compress(app)
 
+# Initial warm-up for tf-model
+from vvapp.tf_model import do_inference
+result = do_inference('zeze_voice.wav')
+print("warmed up!")
+
 import vvapp.views
