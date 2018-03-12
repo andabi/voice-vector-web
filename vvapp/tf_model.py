@@ -24,6 +24,8 @@ from vvapp import app
 host = app.config['TF_SERVER_HOST']
 port = app.config['TF_SERVER_PORT']
 
+duration, sr, n_fft, win_length, hop_length, n_mels = 4, 16000, 512, 512, 128, 80
+
 
 class _Coordinator(object):
   def __init__(self, num_tests, concurrency):
@@ -55,7 +57,7 @@ class _Coordinator(object):
       self._condition.notify()
 
 
-def _create_rpc_callback(coord):
+def _create_rpc_callback():
   def _callback(result_future):
     """Callback function.
   
@@ -72,16 +74,10 @@ def _create_rpc_callback(coord):
       speaker_id = np.argmax(response)
       print('{}: {}'.format(speaker_id, max_prob))
 
-    coord.inc_done()
-    coord.dec_active()
-
   return _callback
 
 
-def do_inference(num_tests, concurrency=1):
-  # dummy audio
-  duration, sr, n_fft, win_length, hop_length, n_mels = 4, 16000, 512, 512, 128, 80
-  filename = librosa.util.example_audio_file()
+def do_inference(filename):
   mel = wav2melspec_db(read_wav(filename, sr=sr, duration=duration), sr, n_fft, win_length, hop_length, n_mels)
   mel = mel.astype(np.float32)
   mel = np.expand_dims(mel, axis=0)  # single batch
@@ -91,36 +87,16 @@ def do_inference(num_tests, concurrency=1):
   channel = implementations.insecure_channel(host, int(port))
   stub = prediction_service_pb2.beta_create_PredictionService_stub(channel)
 
-  coord = _Coordinator(num_tests, concurrency)
+  # build request
+  request = predict_pb2.PredictRequest()
+  request.model_spec.name = 'voice_vector'
+  request.model_spec.signature_name = 'predict'
+  request.inputs['x'].CopyFrom(tf.contrib.util.make_tensor_proto(mel, shape=[1, n_timesteps, n_mels]))
 
-  for _ in range(num_tests):
-    # build request
-    request = predict_pb2.PredictRequest()
-    request.model_spec.name = 'voice_vector'
-    request.model_spec.signature_name = 'predict'
-    request.inputs['x'].CopyFrom(tf.contrib.util.make_tensor_proto(mel, shape=[1, n_timesteps, n_mels]))
+  # asynchronous response (recommended. use this.)
+  # result_future = stub.Predict.future(request, 10.0)  # timeout
+  # result_future.add_done_callback(_create_rpc_callback())
 
-    coord.throttle()
-
-    # asynchronous response (recommended. use this.)
-    result_future = stub.Predict.future(request, 10.0)  # timeout
-    result_future.add_done_callback(_create_rpc_callback(coord))
-
-    # synchronous response (NOT recommended)
-    # result = stub.Predict(request, 5.0)
-
-  coord.wait_all_done()
-
-
-#if __name__ == '__main__':
-  #print('imported!')
-    
-  #num_tests = 1000
-  #concurrency = 50
-#
-  #tic = time.time()
-  #do_inference(num_tests, concurrency=concurrency)
-  #toc = time.time()
-  #tps = num_tests / (toc - tic)
-#
-  #print('done. tps={}'.format(tps))
+  # synchronous response (NOT recommended)
+  result = stub.Predict(request, 5.0)
+  return result

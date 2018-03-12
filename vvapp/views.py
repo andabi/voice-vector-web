@@ -3,7 +3,7 @@ from flask import render_template, redirect, abort, url_for, json, request, send
 
 import os, requests, time, pickle
 
-from tf_model import do_inference
+from vvapp.tf_model import do_inference
 
 # index
 @app.route('/')
@@ -15,4 +15,6 @@ def end_index():
 
 @app.route('/process')
 def api_process():
-    do_inference(
+    result = do_inference('avin_voice.wav')
+    print(result)
+    return ""
