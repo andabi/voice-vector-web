@@ -19,7 +19,7 @@ Compress(app)
 
 # Initial warm-up for tf-model
 from vvapp.tf_model import do_inference
-result = do_inference('zeze_voice.wav')
+result = do_inference(os.path.join('voice_file','zeze_voice.wav'))
 print("warmed up!")
 
 import vvapp.views

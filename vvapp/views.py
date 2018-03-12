@@ -25,7 +25,7 @@ def end_index():
 
 @app.route('/process')
 def api_process():
-    avin_top3 = tf_inf('avin_voice.wav')
+    avin_top3 = tf_inf(os.path.join('voice_file','avin_voice.wav'))
     return jsonify(avin_top3.tolist())
 
 
@@ -37,6 +37,7 @@ def end_api():
         user_file = request.files["user_wav"]
         if user_file:
             file_name = secure_filename(user_file.filename)
+            file_name = os.path.join('voice_file', file_name)
             user_file.save(file_name)
 
             result = tf_inf(file_name)

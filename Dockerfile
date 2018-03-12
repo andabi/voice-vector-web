@@ -25,6 +25,7 @@ RUN cp -r /usr/local/lib/python2.7/dist-packages/tensorflow_serving_api-1.5.0.di
 RUN apt-get remove -y wget rpcbind busybox
 
 RUN useradd -ms /usr/sbin/nologin appuser
+RUN chown appuser /vv/voice_file
 USER appuser
 
 CMD ["python3", "/vv/run.py"]
