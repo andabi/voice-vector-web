@@ -5,7 +5,7 @@ RUN apt-get update && \
     python-pip python3-pip
 
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository -y ppa:mc3man/trusty-media
+RUN add-apt-repository -y ppa:mc3man/xerus-media
 
 RUN apt-get update && \
     apt-get dist-upgrade && \
