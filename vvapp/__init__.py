@@ -12,9 +12,8 @@ class SecureFlask(Flask):
 
 app = SecureFlask(__name__)
 
-#app.config['LOCATION_BOWER'] = "/bower_components"
-#app.config['LOCATION_MEDIA'] = "/shared_media"
-#app.config['LOCATION_ARTICLE'] = "/shared_article"
+app.config['TF_SERVER_HOST'] = 'csi-cluster-gpu23.dakao.io'
+app.config['TF_SERVER_PORT'] = '1027'
 Compress(app)
 
 import vvapp.views
