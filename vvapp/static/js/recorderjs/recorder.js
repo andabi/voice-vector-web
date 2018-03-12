@@ -107,10 +107,23 @@ DEALINGS IN THE SOFTWARE.
   };
 
   Recorder.setupDownload = function(blob, filename){
-    var url = (window.URL || window.webkitURL).createObjectURL(blob);
-    var link = document.getElementById("save");
-    link.href = url;
-    link.download = filename || 'output.wav';
+      var fd = new FormData();
+      //fd.append('fname', 'user_audio.wav');
+      fd.append('user_wav', blob, 'user_audio.wav');
+      $.ajax({
+          type: 'POST',
+          url: '/api',
+          data: fd,
+          processData: false,
+          contentType: false
+      }).done(function(data) {
+          //parsed = JSON.parse(data)
+          document.getElementById("t3_result").innerHTML = data.top3;
+      });
+    //var url = (window.URL || window.webkitURL).createObjectURL(blob);
+    //var link = document.getElementById("save");
+    //link.href = url;
+    //link.download = filename || 'output.wav';
   }
 
   window.Recorder = Recorder;
