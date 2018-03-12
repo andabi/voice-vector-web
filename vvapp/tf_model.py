@@ -1,6 +1,3 @@
-#!/usr/bin/env python2.7
-
-
 from __future__ import print_function
 import sys
 
@@ -28,76 +25,76 @@ duration, sr, n_fft, win_length, hop_length, n_mels = 4, 16000, 512, 512, 128, 8
 
 
 class _Coordinator(object):
-  def __init__(self, num_tests, concurrency):
-    self._num_tests = num_tests
-    self._concurrency = concurrency
-    self._done = 0
-    self._active = 0
-    self._condition = threading.Condition()
+    def __init__(self, num_tests, concurrency):
+        self._num_tests = num_tests
+        self._concurrency = concurrency
+        self._done = 0
+        self._active = 0
+        self._condition = threading.Condition()
 
-  def inc_done(self):
-    with self._condition:
-      self._done += 1
-      self._condition.notify()
+    def inc_done(self):
+        with self._condition:
+            self._done += 1
+            self._condition.notify()
 
-  def wait_all_done(self):
-    with self._condition:
-      while self._done < self._num_tests:
-        self._condition.wait()
+    def wait_all_done(self):
+        with self._condition:
+            while self._done < self._num_tests:
+                self._condition.wait()
 
-  def throttle(self):
-    with self._condition:
-      while self._active >= self._concurrency:
-        self._condition.wait()
-      self._active += 1
+    def throttle(self):
+        with self._condition:
+            while self._active >= self._concurrency:
+                self._condition.wait()
+            self._active += 1
 
-  def dec_active(self):
-    with self._condition:
-      self._active -= 1
-      self._condition.notify()
+    def dec_active(self):
+        with self._condition:
+            self._active -= 1
+            self._condition.notify()
 
 
 #def _create_rpc_callback():
-#  def _callback(result_future):
-#    """Callback function.
-#  
-#    Args:
-#      result_future: Result future of the RPC.
-#    """
-#    exception = result_future.exception()
-#    if exception:
-#      print('exception: {}'.format(exception))
-#      return {'success':0}
-#    else:
-#      result = result_future.result()
-#      response = np.array(result.outputs['prob'].float_val)
-#      max_prob = np.max(response)
-#      speaker_id = np.argmax(response)
-#      print('{}: {}'.format(speaker_id, max_prob))
-#      
-#  return _callback
+#    def _callback(result_future):
+#        """Callback function.
+#    
+#        Args:
+#            result_future: Result future of the RPC.
+#        """
+#        exception = result_future.exception()
+#        if exception:
+#            print('exception: {}'.format(exception))
+#            return {'success':0}
+#        else:
+#            result = result_future.result()
+#            response = np.array(result.outputs['prob'].float_val)
+#            max_prob = np.max(response)
+#            speaker_id = np.argmax(response)
+#            print('{}: {}'.format(speaker_id, max_prob))
+#            
+#    return _callback
 
 
 def do_inference(filename):
-  mel = wav2melspec_db(read_wav(filename, sr=sr, duration=duration), sr, n_fft, win_length, hop_length, n_mels)
-  mel = mel.astype(np.float32)
-  mel = np.expand_dims(mel, axis=0)  # single batch
-  n_timesteps = sr / hop_length * duration + 1
+    mel = wav2melspec_db(read_wav(filename, sr=sr, duration=duration), sr, n_fft, win_length, hop_length, n_mels)
+    mel = mel.astype(np.float32)
+    mel = np.expand_dims(mel, axis=0)    # single batch
+    n_timesteps = sr / hop_length * duration + 1
 
-  # send request
-  channel = implementations.insecure_channel(host, int(port))
-  stub = prediction_service_pb2.beta_create_PredictionService_stub(channel)
+    # send request
+    channel = implementations.insecure_channel(host, int(port))
+    stub = prediction_service_pb2.beta_create_PredictionService_stub(channel)
 
-  # build request
-  request = predict_pb2.PredictRequest()
-  request.model_spec.name = 'voice_vector'
-  request.model_spec.signature_name = 'predict'
-  request.inputs['x'].CopyFrom(tf.contrib.util.make_tensor_proto(mel, shape=[1, n_timesteps, n_mels]))
+    # build request
+    request = predict_pb2.PredictRequest()
+    request.model_spec.name = 'voice_vector'
+    request.model_spec.signature_name = 'predict'
+    request.inputs['x'].CopyFrom(tf.contrib.util.make_tensor_proto(mel, shape=[1, n_timesteps, n_mels]))
 
-  # asynchronous response (recommended. use this.)
-  # result_future = stub.Predict.future(request, 10.0)  # timeout
-  # result_future.add_done_callback(_create_rpc_callback())
+    # asynchronous response (recommended. use this.)
+    # result_future = stub.Predict.future(request, 10.0)    # timeout
+    # result_future.add_done_callback(_create_rpc_callback())
 
-  # synchronous response (NOT recommended)
-  result = stub.Predict(request, 5.0)
-  return result
+    # synchronous response (NOT recommended)
+    result = stub.Predict(request, 5.0)
+    return result
