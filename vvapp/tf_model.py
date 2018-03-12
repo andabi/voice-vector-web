@@ -11,7 +11,7 @@ from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2
 
 import librosa
-from vvapp.audio import wav2melspec_db, read_wav
+from vvapp.audio import wav2melspec_db, read_wav, normalize_db
 import numpy as np
 import time
 import threading
@@ -21,7 +21,7 @@ from vvapp import app
 host = app.config['TF_SERVER_HOST']
 port = app.config['TF_SERVER_PORT']
 
-duration, sr, n_fft, win_length, hop_length, n_mels = 4, 16000, 512, 512, 128, 80
+duration, sr, n_fft, win_length, hop_length, n_mels, max_db, min_db = 4, 16000, 512, 512, 128, 80, 35, -55
 
 
 class _Coordinator(object):
@@ -77,6 +77,7 @@ class _Coordinator(object):
 
 def do_inference(filename):
     mel = wav2melspec_db(read_wav(filename, sr=sr, duration=duration), sr, n_fft, win_length, hop_length, n_mels)
+    mel = normalize_db(mel, max_db=max_db, min_db=min_db)
     mel = mel.astype(np.float32)
     mel = np.expand_dims(mel, axis=0)    # single batch
     n_timesteps = sr / hop_length * duration + 1
