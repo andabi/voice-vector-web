@@ -158,8 +158,8 @@ body{font-family: 'Noto Sans KR', sans-serif !important; font-weight:400; text-a
 
 .navbar { margin-bottom: 0px; border: none; min-height: 0px; border-radius: 0px; border: none; }
 
-#nav_main {height: 60px; background-color: rgba(255,255,255,0.7); border-bottom: 1px solid #ddd;}
-#nav_main a { color: black; !important }
+#nav_main {height: 60px; background-color: rgba(0,0,0,0.4); border-bottom: 1px solid #777;}
+#nav_main a { color: #EEE; !important }
 
 .navbar-nav { margin: 0px; }
 

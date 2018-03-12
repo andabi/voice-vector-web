@@ -20,10 +20,10 @@ body{
 
     background: repeating-linear-gradient(
         45deg,
-        #FFF,
-        #FFF 10px,
-        #F7F7F7 10px,
-        #F7F7F7 13px
+        #333,
+        #333 10px,
+        #444 10px,
+        #444 13px
     )
 }
 
@@ -38,9 +38,10 @@ body{
 
 #ui_box{
     height: 100%;
-    background-color: white;
-    border: 5px solid #ffcd00;
+    background-color: rgba(30,30,30,0.7);
+    border: 7px solid #990099;
     border-radius: 75px;
+    color: #DDD;
 }
 
 #mic_wave{
