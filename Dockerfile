@@ -1,8 +1,11 @@
 FROM ubuntu:latest
 
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository -y ppa:mc3man/trusty-media
+
 RUN apt-get update && \
     apt-get install -y \
-    python-pip python3-pip
+    ffmpeg python-pip python3-pip
 
 WORKDIR /vv
 COPY . /vv
