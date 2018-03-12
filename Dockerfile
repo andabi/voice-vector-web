@@ -8,6 +8,7 @@ WORKDIR /vv
 COPY . /vv
 
 RUN pip3 install -r requirements.txt
+RUN pip3 install grpcio
 RUN pip2 install tensorflow-serving-api
 
 cp -r /usr/local/lib/python2.7/dist-packages/tensorflow_serving /usr/local/lib/python3.5/dist-packages/tensorflow_serving
