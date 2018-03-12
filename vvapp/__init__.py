@@ -10,7 +10,8 @@ class SecureFlask(Flask):
         super(SecureFlask, self).process_response(response)
         return(response)
 
-app = SecureFlask(__name__)
+#app = SecureFlask(__name__)
+app = Flask(__name__)
 
 app.config['TF_SERVER_HOST'] = 'csi-cluster-gpu23.dakao.io'
 app.config['TF_SERVER_PORT'] = '1027'
