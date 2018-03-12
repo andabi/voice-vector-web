@@ -2,12 +2,16 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y \
-    python3-pip
+    python-pip python3-pip
 
 WORKDIR /vv
 COPY . /vv
 
 RUN pip3 install -r requirements.txt
+RUN pip2 install tensorflow-serving-api
+
+cp -r /usr/local/lib/python2.7/dist-packages/tensorflow_serving /usr/local/lib/python3.5/dist-packages/tensorflow_serving
+cp -r /usr/local/lib/python2.7/dist-packages/tensorflow_serving_api-1.5.0.dist-info/ /usr/local/lib/python3.5/dist-packages/tensorflow_serving_api-1.5.0.dist-info
 
 RUN apt-get remove -y wget rpcbind busybox
 
