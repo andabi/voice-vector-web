@@ -1,14 +1,14 @@
 FROM ubuntu:latest
 
-RUN apt-get update && \
+RUN apt-get update -y && \
     apt-get install -y \
     python-pip python3-pip
 
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository -y ppa:mc3man/xerus-media
 
-RUN apt-get update && \
-    apt-get dist-upgrade && \
+RUN apt-get update -y && \
+    apt-get dist-upgrade -y && \
     apt-get install -y \
     ffmpeg
 
