@@ -4,6 +4,7 @@ from flask import render_template, redirect, abort, url_for, json, request, send
 import os, requests, time, pickle
 
 from vvapp.tf_model import do_inference
+import numpy as np
 
 # index
 @app.route('/')
@@ -16,5 +17,10 @@ def end_index():
 @app.route('/process')
 def api_process():
     result = do_inference('avin_voice.wav')
-    print(result)
-    return ""
+    
+    response = np.array(result.outputs['prob'].float_val)
+    #max_prob = np.max(response)
+    #speaker_id = np.argmax(response)
+    #print('{}: {}'.format(speaker_id, max_prob))
+    
+    return jsonify(response)

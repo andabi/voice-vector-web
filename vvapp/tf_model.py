@@ -57,24 +57,25 @@ class _Coordinator(object):
       self._condition.notify()
 
 
-def _create_rpc_callback():
-  def _callback(result_future):
-    """Callback function.
-  
-    Args:
-      result_future: Result future of the RPC.
-    """
-    exception = result_future.exception()
-    if exception:
-      print('exception: {}'.format(exception))
-    else:
-      result = result_future.result()
-      response = np.array(result.outputs['prob'].float_val)
-      max_prob = np.max(response)
-      speaker_id = np.argmax(response)
-      print('{}: {}'.format(speaker_id, max_prob))
-
-  return _callback
+#def _create_rpc_callback():
+#  def _callback(result_future):
+#    """Callback function.
+#  
+#    Args:
+#      result_future: Result future of the RPC.
+#    """
+#    exception = result_future.exception()
+#    if exception:
+#      print('exception: {}'.format(exception))
+#      return {'success':0}
+#    else:
+#      result = result_future.result()
+#      response = np.array(result.outputs['prob'].float_val)
+#      max_prob = np.max(response)
+#      speaker_id = np.argmax(response)
+#      print('{}: {}'.format(speaker_id, max_prob))
+#      
+#  return _callback
 
 
 def do_inference(filename):
