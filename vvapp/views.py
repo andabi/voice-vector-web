@@ -16,7 +16,8 @@ def end_index():
 
 @app.route('/process')
 def api_process():
-    result = do_inference('avin_voice.wav')
+#    result = do_inference('avin_voice.wav')
+    result = do_inference('zeze_voice.wav')
 
     response = np.array(result.outputs['prob'].float_val)
     top3 = np.argsort(response)[::-1][:3]
