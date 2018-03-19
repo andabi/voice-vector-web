@@ -7,6 +7,7 @@ import os, requests, time, pickle
 from vvapp.tf_model import do_inference
 import numpy as np
 
+
 def tf_inf(filename):
     result = do_inference(filename)
     response = np.array(result.outputs['prob'].float_val)

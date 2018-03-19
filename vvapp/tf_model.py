@@ -1,8 +1,4 @@
 from __future__ import print_function
-import sys
-
-sys.path.append('.')
-sys.path.append('..')
 
 from grpc.beta import implementations
 import tensorflow as tf
@@ -10,7 +6,6 @@ import tensorflow as tf
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2
 
-import librosa
 from vvapp.audio import wav2melspec_db, read_wav, normalize_db
 import numpy as np
 import time
@@ -22,57 +17,6 @@ host = app.config['TF_SERVER_HOST']
 port = app.config['TF_SERVER_PORT']
 
 duration, sr, n_fft, win_length, hop_length, n_mels, max_db, min_db = 4, 16000, 512, 512, 128, 80, 35, -55
-
-
-class _Coordinator(object):
-    def __init__(self, num_tests, concurrency):
-        self._num_tests = num_tests
-        self._concurrency = concurrency
-        self._done = 0
-        self._active = 0
-        self._condition = threading.Condition()
-
-    def inc_done(self):
-        with self._condition:
-            self._done += 1
-            self._condition.notify()
-
-    def wait_all_done(self):
-        with self._condition:
-            while self._done < self._num_tests:
-                self._condition.wait()
-
-    def throttle(self):
-        with self._condition:
-            while self._active >= self._concurrency:
-                self._condition.wait()
-            self._active += 1
-
-    def dec_active(self):
-        with self._condition:
-            self._active -= 1
-            self._condition.notify()
-
-
-#def _create_rpc_callback():
-#    def _callback(result_future):
-#        """Callback function.
-#    
-#        Args:
-#            result_future: Result future of the RPC.
-#        """
-#        exception = result_future.exception()
-#        if exception:
-#            print('exception: {}'.format(exception))
-#            return {'success':0}
-#        else:
-#            result = result_future.result()
-#            response = np.array(result.outputs['prob'].float_val)
-#            max_prob = np.max(response)
-#            speaker_id = np.argmax(response)
-#            print('{}: {}'.format(speaker_id, max_prob))
-#            
-#    return _callback
 
 
 def do_inference(filename):
@@ -99,3 +43,54 @@ def do_inference(filename):
     # synchronous response (NOT recommended)
     result = stub.Predict(request, 5.0)
     return result
+
+
+# class _Coordinator(object):
+#     def __init__(self, num_tests, concurrency):
+#         self._num_tests = num_tests
+#         self._concurrency = concurrency
+#         self._done = 0
+#         self._active = 0
+#         self._condition = threading.Condition()
+#
+#     def inc_done(self):
+#         with self._condition:
+#             self._done += 1
+#             self._condition.notify()
+#
+#     def wait_all_done(self):
+#         with self._condition:
+#             while self._done < self._num_tests:
+#                 self._condition.wait()
+#
+#     def throttle(self):
+#         with self._condition:
+#             while self._active >= self._concurrency:
+#                 self._condition.wait()
+#             self._active += 1
+#
+#     def dec_active(self):
+#         with self._condition:
+#             self._active -= 1
+#             self._condition.notify()
+
+
+#def _create_rpc_callback():
+#    def _callback(result_future):
+#        """Callback function.
+#
+#        Args:
+#            result_future: Result future of the RPC.
+#        """
+#        exception = result_future.exception()
+#        if exception:
+#            print('exception: {}'.format(exception))
+#            return {'success':0}
+#        else:
+#            result = result_future.result()
+#            response = np.array(result.outputs['prob'].float_val)
+#            max_prob = np.max(response)
+#            speaker_id = np.argmax(response)
+#            print('{}: {}'.format(speaker_id, max_prob))
+#
+#    return _callback
