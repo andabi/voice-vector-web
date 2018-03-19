@@ -118,7 +118,7 @@ DEALINGS IN THE SOFTWARE.
           contentType: false
       }).done(function(data) {
           //parsed = JSON.parse(data)
-          document.getElementById("t3_result").innerHTML = data.top3;
+          document.getElementById("div_result").innerHTML = data.full_name;
       });
     //var url = (window.URL || window.webkitURL).createObjectURL(blob);
     //var link = document.getElementById("save");

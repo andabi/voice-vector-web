@@ -11,9 +11,8 @@ import numpy as np
 def tf_inf(filename):
     result = do_inference(filename)
     response = np.array(result.outputs['prob'].float_val)
-    top3 = np.argsort(response)[::-1][:3]
-    
-    return top3
+    top_index = np.argmax(response)
+    return top_index
     
 
 # index
@@ -42,9 +41,11 @@ def end_api():
             user_file.save(file_name)
 
             result = tf_inf(file_name)
+
+            speaker_meta = app.config['SPEAKER_META'][result]
+            result_dict = speaker_meta.copy()
             result_dict['success'] = 1
-            result_dict['top3'] = result.tolist()
-            
+
         else:
             result_dict['success'] = 0
     else:
