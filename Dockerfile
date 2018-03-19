@@ -17,7 +17,7 @@ COPY . /vv
 
 RUN pip3 install -r requirements.txt
 RUN pip3 install grpcio
-RUN pip2 install tensorflow-serving-api
+RUN pip2 install tensorflow-serving-api==1.5.0
 
 RUN cp -r /usr/local/lib/python2.7/dist-packages/tensorflow_serving /usr/local/lib/python3.5/dist-packages/tensorflow_serving
 RUN cp -r /usr/local/lib/python2.7/dist-packages/tensorflow_serving_api-1.5.0.dist-info/ /usr/local/lib/python3.5/dist-packages/tensorflow_serving_api-1.5.0.dist-info
