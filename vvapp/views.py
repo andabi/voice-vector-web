@@ -43,6 +43,7 @@ def end_api():
             result = tf_inf(file_name)
 
             speaker_meta = app.config['SPEAKER_META'][result]
+            print(speaker_meta)
             result_dict = speaker_meta.copy()
             result_dict['success'] = 1
 

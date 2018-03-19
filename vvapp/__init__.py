@@ -19,6 +19,7 @@ app.config['TF_SERVER_HOST'] = 'csi-cluster-gpu23.dakao.io'
 app.config['TF_SERVER_PORT'] = '1027'
 Compress(app)
 
+# load speaker meta
 with open('vvapp/speaker_list.pkl', 'rb') as f:
     app.config['SPEAKER_META'] = pickle.load(f)
 
