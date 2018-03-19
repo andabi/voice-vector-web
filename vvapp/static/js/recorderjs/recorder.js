@@ -118,7 +118,17 @@ DEALINGS IN THE SOFTWARE.
           contentType: false
       }).done(function(data) {
           //parsed = JSON.parse(data)
-          document.getElementById("div_result").innerHTML = data.full_name;
+          //document.getElementById("div_result").innerHTML = data.full_name;
+          
+          document.getElementById("result_img").src = "/static/img/celeb_face/"+data.full_name+"."+data.picture;
+          document.getElementById("result_name").innerHTML = data.full_name;
+          
+          var element = document.getElementById("div_record");
+          element.classList.add("div_hidden");
+          
+          var element = document.getElementById("div_result");
+          element.classList.remove("div_hidden");
+          
       });
     //var url = (window.URL || window.webkitURL).createObjectURL(blob);
     //var link = document.getElementById("save");

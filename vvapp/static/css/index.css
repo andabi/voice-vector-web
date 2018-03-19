@@ -32,9 +32,11 @@ body{
     vertical-align: middle;
 }
 
+/*
 #ui_row{
     height: 300px;
 }
+*/
 
 #ui_box{
     height: 100%;
@@ -50,3 +52,17 @@ body{
 }
 
 .recording{color: blue;}
+
+
+
+
+.div_hidden{
+    display: none;
+}
+
+
+
+#result_img{
+    max-width: 200px;
+    max-height: 200px;
+}

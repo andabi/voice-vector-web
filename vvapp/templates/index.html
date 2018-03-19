@@ -46,24 +46,41 @@
             <div class="container" id="ui_con">
                 <div class="row" id="ui_row">
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" id="ui_box">
-                        <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
-                            <div class="space_30"></div>
-                            <div class="row">
-                                <div class="col-xs-12 txt_title20 txt_bold">당신의 목소리를 녹음해보세요</div>
+                        <div class="row" id="div_record">
+                            <div class="col-xs-12">
+                                <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
+                                    <div class="space_30"></div>
+                                    <div class="row">
+                                        <div class="col-xs-12 txt_title20 txt_bold">당신의 목소리를 녹음해보세요</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <canvas id="mic_wave"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12"><span onclick="toggleRecording(this);">녹음 시작하기</span></div>
+                                    </div>
+                                    <div class="space_30"></div>
+                                </form>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <canvas id="mic_wave"/>
+                        </div>
+                        
+                        <div class="row div_hidden" id="div_result">
+                            <div class="col-xs-12">
+                                <div class="row" id="row_img">
+                                    <div class="col-xs-12">
+                                        <img src="/static/img/celeb_face/A.J._Buckley.jpg" id="result_img"/>
+                                    </div>
+                                </div>
+                                <div class="row" id="row_name">
+                                    <div class="col-xs-12" id="result_name">
+                                        A.J._Buckley
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12"><span onclick="toggleRecording(this);">녹음 시작하기</span></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12"><span id="div_result">저장</span></div>
-                            </div>
-
-                        </form>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
