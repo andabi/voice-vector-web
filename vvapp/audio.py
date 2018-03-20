@@ -53,7 +53,7 @@ def trim_wav(wav):
 
 def fix_length(wav, length):
     if len(wav) != length:
-        wav = librosa.util.fix_length(wav, length)
+        wav = librosa.util.fix_length(wav, length, mode='reflect')
     return wav
 
 
