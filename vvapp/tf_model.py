@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2
 
-from vvapp.audio import wav2melspec_db, read_wav, normalize_db
+from vvapp.audio import wav2melspec_db, read_wav, normalize_db, fix_length
 import numpy as np
 import time
 import threading
@@ -24,7 +24,9 @@ duration, sr, n_fft, win_length, hop_length, n_mels, max_db, min_db = 4, 16000, 
 
 
 def do_inference(filename):
-    mel = wav2melspec_db(read_wav(filename, sr=sr, duration=duration), sr, n_fft, win_length, hop_length, n_mels)
+    wav = read_wav(filename, sr=sr, duration=duration)
+    wav = fix_length(wav, sr * duration, mode='reflect')
+    mel = wav2melspec_db(wav, sr, n_fft, win_length, hop_length, n_mels)
     mel = normalize_db(mel, max_db=max_db, min_db=min_db)
     mel = mel.astype(np.float32)
     mel = np.expand_dims(mel, axis=0)    # single batch
