@@ -6,6 +6,7 @@ import os, requests, time, pickle
 
 from vvapp.tf_model import do_inference
 import numpy as np
+import glob
 
 
 def tf_inf(filename):
@@ -14,6 +15,26 @@ def tf_inf(filename):
     top_index = np.argmax(response)
     return top_index
     
+
+def yt_url(vid, start):
+    '''
+    :param vid: video id
+    :param start: start time in sec
+    :return: youtube video link
+    '''
+    return 'https://www.youtube.com/watch?v={}&start={}'.format(vid, start)
+
+
+def get_yt_params(speaker_name, n_video=2):
+    params = []
+    for file in glob.glob('vvapp/video_urls/{}/*.txt'.format(speaker_name)):
+        with open(file, 'r') as f:
+            lines = f.readlines()
+            vid = lines[1].split('\t')[1].strip().replace('\n', '')
+            s_time = int(float(lines[5].split(' ')[1]))
+            params.append((vid, s_time))
+    return params[:n_video]
+
 
 # index
 @app.route('/')
@@ -40,9 +61,13 @@ def end_api():
             file_name = os.path.join('voice_file', file_name)
             user_file.save(file_name)
 
-            result = tf_inf(file_name)
+            speaker_id = tf_inf(file_name)
+            speaker_meta = app.config['SPEAKER_META'][speaker_id]
 
-            speaker_meta = app.config['SPEAKER_META'][result]
+            # append youtube video links
+            params = get_yt_params(speaker_meta['full_name'])
+            speaker_meta['yt_params'] = params
+
             result_dict = speaker_meta.copy()
             result_dict['success'] = 1
 

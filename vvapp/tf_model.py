@@ -1,4 +1,5 @@
 from __future__ import print_function
+
 import sys
 
 sys.path.append('.')
@@ -12,9 +13,6 @@ from tensorflow_serving.apis import prediction_service_pb2
 
 from vvapp.audio import wav2melspec_db, read_wav, normalize_db, fix_length
 import numpy as np
-import time
-import threading
-
 
 from vvapp import app
 host = app.config['TF_SERVER_HOST']
