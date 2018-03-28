@@ -1,4 +1,4 @@
-FROM idock.daumkakao.io/kakaobrain/zeze_base
+FROM idock.daumkakao.io/kakaobrain/zeze_base:v1
 
 RUN apt-get install -y python-pip
 RUN apt-get install -y software-properties-common
