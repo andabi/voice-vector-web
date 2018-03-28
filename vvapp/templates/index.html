@@ -81,6 +81,11 @@
                                     <div class="col-xs-12" id="result_yt">
                                     </div>
                                 </div>
+                                <div class="row" id="row_restart">
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-warning" href="javascript:void(0);" onclick="javascript:restart_process();" role="button">다시하기</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -110,6 +115,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/static/boot/js/bootstrap.min.js"></script>
+
+        <script>
+            function restart_process(){
+                var element = document.getElementById("div_result");
+                element.classList.add("div_hidden");
+
+                var element = document.getElementById("div_record");
+                element.classList.remove("div_hidden");
+            }
+        </script>
         
         
         {% block page_script %}{% endblock %}

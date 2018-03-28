@@ -2,7 +2,7 @@ from vvapp import app
 from flask import render_template, redirect, abort, url_for, json, request, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
 
-import os, requests, time, pickle
+import os, requests, time, pickle, random, datetime
 
 from vvapp.tf_model import do_inference
 import numpy as np
@@ -36,6 +36,14 @@ def get_yt_params(speaker_name, n_video=2):
     return params[:n_video]
 
 
+def generate_random_datetime_salt():
+    rand_salt = str(random.randrange(1000000,10000000))
+    nowdt = datetime.datetime.now()
+    nowstr = nowdt.strftime('%Y%m%d%H%M%S')
+
+    return nowstr + rand_salt
+
+
 # index
 @app.route('/')
 @app.route('/index')
@@ -56,9 +64,12 @@ def end_api():
     
     if request.method == 'POST':
         user_file = request.files["user_wav"]
+        #print(user_file)
         if user_file:
-            file_name = secure_filename(user_file.filename)
-            file_name = os.path.join('voice_file', file_name)
+            #file_name = secure_filename(user_file.filename)
+            #file_name = os.path.join('voice_file', file_name)
+            #print(file_name)
+            file_name = os.path.join('voice_file', generate_random_datetime_salt()+".wav")
             user_file.save(file_name)
 
             speaker_id = tf_inf(file_name)
