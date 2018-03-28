@@ -82,6 +82,8 @@ def end_api():
             result_dict = speaker_meta.copy()
             result_dict['success'] = 1
 
+            print(result_dict)
+
         else:
             result_dict['success'] = 0
     else:

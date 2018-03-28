@@ -1,123 +1,148 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="/static/boot/css/bootstrap.min.css"/>
-        <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon">
-        
-        <title>Voice Vector Webpage</title>
-        
-        {% block head_og %}
-        <meta property="og:title" content="Voice Vector Webpage" />
-        <meta property="og:description" content="Voice Vector Webpage" />
-        {% endblock %}
-        <meta property="og:type" content="website" />
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/boot/css/bootstrap.min.css"/>
+    <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon">
 
-        <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
-        <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
-        
-        <script src="/static/js/audiodisplay.js"></script>
-        <script src="/static/js/recorderjs/recorder.js"></script>
-        <script src="/static/js/main.js"></script>
-        
-        <style>
-        </style>
-    </head>
-    <body>
-        
-        <nav class="navbar navbar-default" id="nav_main" role="navigation">
-            <div class="container">
-                <div id="navbar-extend">
-                    <ul class="nav navbar-nav" id="navbar_main">
-                        <li class="dropdown">
-                            <a href="#">
-                                Voice Vector Web
-                            </a>
-                        </li>
-                    </ul>
+    <title>Voice Vector Webpage</title>
+
+    {% block head_og %}
+        <meta property="og:title" content="Voice Vector Webpage"/>
+        <meta property="og:description" content="Voice Vector Webpage"/>
+    {% endblock %}
+    <meta property="og:type" content="website"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+
+    <script src="/static/js/audiodisplay.js"></script>
+    <script src="/static/js/recorderjs/recorder.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default" id="nav_main" role="navigation">
+    <div class="container">
+        <div id="navbar-extend">
+            <ul class="nav navbar-nav" id="navbar_main">
+                <li class="dropdown">
+                    <a href="#">
+                        Voice Vector Web
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid" id="conf_body">
+    <div class="container" id="ui_con">
+        <div class="row" id="ui_row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3"
+                 id="ui_box">
+                <div class="row" id="div_record">
+                    <div class="col-xs-12">
+                        <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
+                            <div class="space_30"></div>
+                            <div class="row">
+                                <div class="col-xs-12 txt_title20 txt_bold">당신의 목소리를 녹음해보세요</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <canvas id="mic_wave"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12"><span onclick="toggleRecording(this);">녹음 시작하기</span></div>
+                            </div>
+                            <div class="space_30"></div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        
-        
-        <div class="container-fluid" id="conf_body">
-            <div class="container" id="ui_con">
-                <div class="row" id="ui_row">
-                    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" id="ui_box">
-                        <div class="row" id="div_record">
+
+                <div class="row div_hidden" id="div_result">
+                    <div class="col-xs-12">
+                        <div class="row" id="row_img">
                             <div class="col-xs-12">
-                                <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
-                                    <div class="space_30"></div>
-                                    <div class="row">
-                                        <div class="col-xs-12 txt_title20 txt_bold">당신의 목소리를 녹음해보세요</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <canvas id="mic_wave"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12"><span onclick="toggleRecording(this);">녹음 시작하기</span></div>
-                                    </div>
-                                    <div class="space_30"></div>
-                                </form>
+                                <img src="/static/img/default_face.png" id="result_img"/>
                             </div>
                         </div>
-                        
-                        <div class="row div_hidden" id="div_result">
+                        <div class="row" id="row_name">
                             <div class="col-xs-12">
-                                <div class="row" id="row_img">
-                                    <div class="col-xs-12">
-                                        <img src="/static/img/default_face.png" id="result_img"/>
-                                    </div>
-                                </div>
-                                <div class="row" id="row_name">
-                                    <div class="col-xs-12" id="result_name">
-                                    </div>
-                                </div>
-                                <div class="row" id="row_yt">
-                                    <div class="col-xs-12" id="result_yt">
-                                    </div>
-                                </div>
-                                <div class="row" id="row_restart">
-                                    <div class="col-xs-12">
-                                        <a class="btn btn-warning" href="javascript:void(0);" onclick="javascript:restart_process();" role="button">다시하기</a>
-                                    </div>
-                                </div>
+                                <span id="result_name"></span>를 닮았네요!
                             </div>
                         </div>
-                        
+                        <div class="row" id="row_sex">
+                            <div class="col-xs-12">
+                                성별: <span id="result_sex"></span>
+                            </div>
+                        </div>
+                        <div class="row" id="row_age">
+                            <div class="col-xs-12">
+                                출생연도: <span id="result_age"></span>
+                            </div>
+                        </div>
+                        <div class="row" id="row_nationality">
+                            <div class="col-xs-12">
+                                국적: <span id="result_nationality"></span>
+                            </div>
+                        </div>
+                        <div class="row" id="row_job">
+                            <div class="col-xs-12">
+                                직업: <span id="result_job"></span>
+                            </div>
+                        </div>
+                        <div class="row" id="row_height">
+                            <div class="col-xs-12">
+                                키: <span id="result_height"></span>
+                            </div>
+                        </div>
+                        <div class="row" id="row_yt">
+                            <div class="col-xs-12" id="result_yt">
+                            </div>
+                        </div>
+                        <div class="row" id="row_restart">
+                            <div class="col-xs-12">
+                                <a class="btn btn-warning" href="javascript:void(0);"
+                                   onclick="javascript:restart_process();" role="button">다시하기</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        
-        <div class="container-fluid bg_kakao_gray" id="footer">
-            <div class="container">
-                <div class="row">
-                    <!--<div class="col-md-4 col-xs-12">-->
-                    <div class="col-xs-12">
-                        Copyright © Kakao Brain Corp. All rights reserved.
-                    </div>
-                    {#<div class="col-md-8 col-xs-12" id="footer_text">
+
+<div class="container-fluid bg_kakao_gray" id="footer">
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-md-4 col-xs-12">-->
+            <div class="col-xs-12">
+                Copyright © Kakao Brain Corp. All rights reserved.
+            </div>
+            {#<div class="col-md-8 col-xs-12" id="footer_text">
                         13494 경기도 성남시 분당구 판교역로 235, 6층 (삼평동, 에이치스퀘어 엔동)<BR/>
                         Copyright © 2017 Kakao Brain Corp. All rights reserved.
                         <a class="txt_nodeco" href="/extra/open">오픈소스 라이센스</a> | <a class="txt_nodeco" href="/extra/privacy">개인정보 처리방침</a>
                     </div>#}
-                </div>
-            </div>
         </div>
-        
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/static/boot/js/bootstrap.min.js"></script>
 
         <script>
-            function restart_process(){
+            function restart_process() {
                 var element = document.getElementById("div_result");
                 element.classList.add("div_hidden");
 
@@ -125,9 +150,11 @@
                 element.classList.remove("div_hidden");
             }
         </script>
-        
-        
+
+
         {% block page_script %}{% endblock %}
-        
-    </body>
+
+    </div>
+</div>
+</body>
 </html>

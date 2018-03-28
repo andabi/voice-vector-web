@@ -121,7 +121,17 @@
             //document.getElementById("div_result").innerHTML = data.full_name;
 
             document.getElementById("result_img").src = "/static/img/celeb_face/" + data.full_name + "." + data.picture;
-            document.getElementById("result_name").innerHTML = data.full_name;
+            document.getElementById("result_name").innerText = data.full_name;
+            document.getElementById("result_sex").innerText = data.sex;
+            document.getElementById("result_age").innerText = data.age;
+            document.getElementById("result_nationality").innerText = data.nationality;
+            document.getElementById("result_job").innerText = data.Job;
+            result_height = document.getElementById("result_height");
+            if(data.Height) {
+                result_height.innerText = data.Height;
+            } else {
+                result_height.parentNode.classList.add("div_hidden");
+            }
 
             //youtube vidio embedded.
             html = '';
