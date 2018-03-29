@@ -139,7 +139,7 @@
                 params = data.yt_params[i];
                 vid = params[0];
                 s_time = params[1];
-                html += '​<iframe width="560" height="315" src="https://www.youtube.com/embed/' + vid + '?start=' + s_time + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
+                html += '​<iframe width="560" height="315" src="https://www.youtube.com/embed/' + vid + '?start=' + s_time + '" frameborder="0" allow="autoplay;" allowfullscreen></iframe>'
             }
             document.getElementById("result_yt").innerHTML = html;
 
