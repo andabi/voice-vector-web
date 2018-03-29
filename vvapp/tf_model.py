@@ -11,7 +11,7 @@ import tensorflow as tf
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2
 
-from vvapp.audio import wav2melspec_db, read_wav, normalize_db, fix_length
+from vvapp.audio import wav2melspec_db, normalize_db, fix_length, read_wav_from_stream
 import numpy as np
 
 from vvapp import app
@@ -21,8 +21,8 @@ port = app.config['TF_SERVER_PORT']
 duration, sr, n_fft, win_length, hop_length, n_mels, max_db, min_db = 4, 16000, 512, 512, 128, 80, 35, -55
 
 
-def do_inference(filename):
-    wav = read_wav(filename, sr=sr, duration=duration)
+def request_sim(stream):
+    wav = read_wav_from_stream(stream, sr)
     wav = fix_length(wav, sr * duration, mode='reflect')
     mel = wav2melspec_db(wav, sr, n_fft, win_length, hop_length, n_mels)
     mel = normalize_db(mel, max_db=max_db, min_db=min_db)
@@ -45,6 +45,7 @@ def do_inference(filename):
     # result_future.add_done_callback(_create_rpc_callback())
 
     # synchronous response (NOT recommended)
+    # TODO handling timeout case
     result = stub.Predict(request, 5.0)
     return result
 

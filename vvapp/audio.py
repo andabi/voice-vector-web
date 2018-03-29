@@ -40,6 +40,14 @@ def write_spectrogram(prefix, spec):
     np.save(filename, spec)
 
 
+def read_wav_from_stream(stream, sr):
+    wav, orig_sr = sf.read(stream)
+    wav = wav.T
+    wav = librosa.to_mono(wav)
+    wav = librosa.resample(wav, orig_sr, sr)
+    return wav
+
+
 def split_wav(wav, top_db):
     intervals = librosa.effects.split(wav, top_db=top_db)
     wavs = map(lambda i: wav[i[0]: i[1]], intervals)
