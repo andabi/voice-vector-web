@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav" id="navbar_main">
                 <li class="dropdown">
                     <a href="#">
-                        Voice Vector Web
+                        <span style="font-size:16pt">Which of the Hollywood stars is most similar to my voice?</span>
                     </a>
                 </li>
             </ul>
@@ -52,7 +52,7 @@
                         <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
                             <div class="space_30"></div>
                             <div class="row">
-                                <div class="col-xs-12 txt_title20 txt_bold">당신의 목소리를 녹음해보세요</div>
+                                <div class="col-xs-12 txt_title20 txt_bold">Say anything aloud</div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12"><span onclick="toggleRecording(this);">녹음 시작하기</span></div>
+                                <div class="col-xs-12"><span onclick="toggleRecording(this);">Start</span></div>
                             </div>
                             <div class="space_30"></div>
                         </form>
@@ -76,32 +76,32 @@
                         </div>
                         <div class="row" id="row_name">
                             <div class="col-xs-12">
-                                <span id="result_name"></span>를 닮았네요!
+                                Your voice is most similar with <span id="result_name" class="txt_bold"></span>!
                             </div>
                         </div>
                         <div class="row" id="row_sex">
                             <div class="col-xs-12">
-                                성별: <span id="result_sex"></span>
+                                Sex: <span id="result_sex"></span>
                             </div>
                         </div>
                         <div class="row" id="row_age">
                             <div class="col-xs-12">
-                                출생연도: <span id="result_age"></span>
+                                Year: <span id="result_age"></span>
                             </div>
                         </div>
                         <div class="row" id="row_nationality">
                             <div class="col-xs-12">
-                                국적: <span id="result_nationality"></span>
+                                Nationality: <span id="result_nationality"></span>
                             </div>
                         </div>
                         <div class="row" id="row_job">
                             <div class="col-xs-12">
-                                직업: <span id="result_job"></span>
+                                Job: <span id="result_job"></span>
                             </div>
                         </div>
                         <div class="row" id="row_height">
                             <div class="col-xs-12">
-                                키: <span id="result_height"></span>
+                                Height: <span id="result_height"></span>
                             </div>
                         </div>
                         <div class="row" id="row_yt">
@@ -111,11 +111,19 @@
                         <div class="row" id="row_restart">
                             <div class="col-xs-12">
                                 <a class="btn btn-warning" href="javascript:void(0);"
-                                   onclick="javascript:restart_process();" role="button">다시하기</a>
+                                   onclick="javascript:restart_process();" role="button">Try Again</a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="margin-top:10px">
+                <span style="color:grey">Note: this is only supported on Chrome and Firefox desktops.</span>
+            </div>
+            <div class="col-xs-12" style="">
+                <span style="color:gray">Source Code: <a href="https://github.com/andabi/speaker-embedding" target="_blank">github.com/andabi/speaker-embedding</a></span>
             </div>
         </div>
     </div>
