@@ -110,6 +110,13 @@
         var fd = new FormData();
         //fd.append('fname', 'user_audio.wav');
         fd.append('user_wav', blob, 'user_audio.wav');
+
+        var element = document.getElementById("div_record");
+        element.classList.add("div_hidden");
+
+        var element = document.getElementById("div_process");
+        element.classList.remove("div_hidden");
+
         $.ajax({
             type: 'POST',
             url: '/api',
@@ -133,17 +140,25 @@
                 result_height.parentNode.classList.add("div_hidden");
             }
 
-            //youtube vidio embedded.
-            html = '';
-            for (i = 0; i < data.yt_params.length; i++) {
+            //youtube video embedded.
+            //html = '';
+
+            if(data.yt_params.length > 2){
+                yt_cnt = 2;
+            }
+            else{
+                yt_cnt = data.yt_params.length;
+            }
+            for (i = 0; i < yt_cnt; i++) {
                 params = data.yt_params[i];
                 vid = params[0];
                 s_time = params[1];
-                html += '​<iframe width="560" height="315" src="https://www.youtube.com/embed/' + vid + '?start=' + s_time + '" frameborder="0" allow="autoplay;" allowfullscreen></iframe>'
+                html = '​<iframe src="https://www.youtube.com/embed/' + vid + '?start=' + s_time + '" frameborder="0" allow="autoplay;" allowfullscreen></iframe>'
+                
+                document.getElementById("result_yt_"+(i+1)).innerHTML = html;
             }
-            document.getElementById("result_yt").innerHTML = html;
 
-            var element = document.getElementById("div_record");
+            var element = document.getElementById("div_process");
             element.classList.add("div_hidden");
 
             var element = document.getElementById("div_result");
