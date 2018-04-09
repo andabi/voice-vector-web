@@ -57,12 +57,18 @@ function toggleRecording( e ) {
         // stop recording
         audioRecorder.stop();
         e.classList.remove("recording");
+        e.classList.remove("btn-danger");
+        e.classList.add("btn-default");
+        e.innerHTML = "Start";
         audioRecorder.getBuffers( gotBuffers );
     } else {
         // start recording
         if (!audioRecorder)
             return;
         e.classList.add("recording");
+        e.classList.remove("btn-default");
+        e.classList.add("btn-danger");
+        e.innerHTML = "Finish";
         audioRecorder.clear();
         audioRecorder.record();
     }

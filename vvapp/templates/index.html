@@ -32,7 +32,7 @@
         <div id="navbar-extend">
             <ul class="nav navbar-nav" id="navbar_main">
                 <li class="dropdown">
-                    <a href="#">
+                    <a href="/">
                         <span style="font-size:16pt">Which of the Hollywood stars is most similar to my voice?</span>
                     </a>
                 </li>
@@ -47,6 +47,7 @@
         <div class="row" id="ui_row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3"
                  id="ui_box">
+                <div class="space_20"></div>
                 <div class="row" id="div_record">
                     <div class="col-xs-12">
                         <form action="" method="POST" id="record_form" name="record_form" enctype="multipart/form-data">
@@ -59,8 +60,12 @@
                                     <canvas id="mic_wave"/>
                                 </div>
                             </div>
+                            <div class="space_10"></div>
                             <div class="row">
-                                <div class="col-xs-12"><span onclick="toggleRecording(this);">Start</span></div>
+                                <div class="col-xs-12">
+                                    <a class="btn btn-default" href="javascript:void(0);"
+                                        onclick="toggleRecording(this);" role="button" id="btn_record">Start</a>
+                                </div>
                             </div>
                             <div class="space_30"></div>
                         </form>
@@ -69,8 +74,12 @@
 
                 <div class="row div_hidden" id="div_process">
                     <div class="col-xs-12">
-                        In Progress...<BR/>
-                        This will be finish in few seconds.
+                        <div class="space_20"></div>
+                        <div class="row">
+                            In Progress...<BR/>
+                            This will be finish in few seconds.
+                        </div>
+                        <div class="space_20"></div>
                     </div>
                 </div>
 
@@ -81,6 +90,7 @@
                                 <img src="/static/img/default_face.png" id="result_img"/>
                             </div>
                         </div>
+                        <div class="space_10"></div>
                         <div class="row" id="row_name">
                             <div class="col-xs-12">
                                 Your voice is most similar with <span id="result_name" class="txt_bold"></span>!
@@ -99,29 +109,35 @@
                         <div class="space_20"></div>
                         <div class="row">
                             <div class="col-xs-12 txt_center">
-                                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapse_youtube" aria-expanded="false" aria-controls="collapse_youtube">
+                                <button class="btn btn-default" id="btn_videos" type="button" data-toggle="collapse" data-target="#collapse_youtube" aria-expanded="false" aria-controls="collapse_youtube">
                                     Show YouTube videos about most similar with you!
                                 </button>
                             </div>
                         </div>
-                        <div class="collapse" id="collapse_youtube">
-                            <div class="well">
-                                <div class="row" id="row_youtube">
-                                    <div class="col-xs-12" id="result_yt_1">
-                                    </div>
-                                    <div class="col-xs-12" id="result_yt_2">
+                        <div class="space_10"></div>
+                        <div class="row">
+                            <div class="col-xs-12 collapse" id="collapse_youtube">
+                                <div class="well">
+                                    <div class="row" id="row_youtube">
+                                        <div class="col-xs-12" id="result_yt_1">
+                                        </div>
+                                        <div class="col-xs-12" id="result_yt_2">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="space_20"></div>
                         <div class="row" id="row_restart">
                             <div class="col-xs-12">
-                                <a class="btn btn-warning" href="javascript:void(0);"
+                                <a class="btn btn-warning" id="btn_again" href="javascript:void(0);"
                                    onclick="javascript:restart_process();" role="button">Try Again</a>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
+                <div class="space_20"></div>
             </div>
         </div>
         <div class="row">
