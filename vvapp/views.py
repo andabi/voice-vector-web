@@ -1,6 +1,4 @@
-import datetime
-import glob
-import random
+import glob, datetime, random, os, json
 
 import numpy as np
 from flask import render_template, request, jsonify
@@ -8,11 +6,14 @@ from flask import render_template, request, jsonify
 from vvapp import app
 from vvapp.tf_model import request_sim
 
+# List of Open Source
+open_source_list = json.load(open(os.path.join(os.path.dirname(os.path.realpath(__file__)),'../open_source.json')))
+
 
 @app.route('/')
 @app.route('/index')
 def end_index():
-    return render_template("index.html")
+    return render_template("index.html", open_source_list=open_source_list)
 
 
 @app.route('/api', methods=['POST'])

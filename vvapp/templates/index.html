@@ -179,6 +179,13 @@
                 var element = document.getElementById("div_record");
                 element.classList.remove("div_hidden");
             }
+
+            function open_sources(){
+                alert(
+                    {% for one_open in open_source_list %}
+                    "{{ one_open.name }} - {{one_open.license}} - {{one_open.url}} \r\n" +
+                    {% endfor %} "are used!");
+            }
         </script>
 
 

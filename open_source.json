@@ -1,0 +1,27 @@
+[
+    {
+        "name" : "Flask",
+        "license" : "BSD",
+        "url" : "http://flask.pocoo.org/"
+    },
+    {
+        "name" : "flask-compress",
+        "license" : "MIT",
+        "url" : "https://github.com/libwilliam/flask-compress"
+    },
+    {
+        "name" : "requests",
+        "license" : "Apache 2.0",
+        "url" : "https://github.com/requests/requests/"
+    },
+    {
+        "name" : "numpy",
+        "license" : "BSD",
+        "url" : "http://www.numpy.org/"
+    },
+    {
+        "name" : "bootstrap",
+        "license" : "MIT",
+        "url" : "http://getbootstrap.com"
+    }
+]

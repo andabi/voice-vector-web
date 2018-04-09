@@ -1,14 +1,15 @@
 import os, requests, json
 
-step_cnt = 2
-mode = 'run'
+step_cnt = 3
+mode = 'deploy'
+skip_build = True
 
 port = 1044
 docker_image = "voice-vector-web:latest"
 marathon_id = "zeze.zzz/vv-web"
 is_dev = True
 
-if step_cnt > 0:
+if step_cnt > 0 and skip_build == False:
     print('[STEP 1/3] docker build...')
     os.system('docker build . -t idock.daumkakao.io/kakaobrain/{}'.format(docker_image))
 
