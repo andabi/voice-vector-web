@@ -24,8 +24,9 @@ def end_api():
         user_file = request.files["user_wav"]
         if user_file:
             # TODO save wav to tenth or minio
-            speaker_id = get_most_sim(user_file)
+            speaker_id, percent = get_most_sim(user_file)
             speaker_meta = app.config['SPEAKER_META'][speaker_id]
+            speaker_meta['percent'] = percent
 
             # append youtube video links
             params = get_yt_params(speaker_meta['full_name'])
@@ -45,7 +46,8 @@ def get_most_sim(stream):
     result = request_sim(stream)
     response = np.array(result.outputs['prob'].float_val)
     top_index = np.argmax(response)
-    return top_index
+    percent = np.max(response)
+    return top_index, percent
 
 
 def yt_url(vid, start):

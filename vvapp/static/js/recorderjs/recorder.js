@@ -128,7 +128,8 @@
             //document.getElementById("div_result").innerHTML = data.full_name;
 
             document.getElementById("result_img").src = "/static/img/celeb_face/" + data.full_name + "." + data.picture;
-            document.getElementById("result_name").innerText = data.full_name;
+            document.getElementById("result_percent").innerText = parseInt(data.percent * 100);
+            document.getElementById("result_name").innerText = data.full_name.replace("_"," ");
             document.getElementById("result_sex").innerText = data.sex;
             document.getElementById("result_age").innerText = data.age;
             document.getElementById("result_nationality").innerText = data.nationality;
